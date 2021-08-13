@@ -8,7 +8,7 @@ import SetPassword from './components/SetPassword/SetPassword'
 function App() {
   return (
     <div className="App">
-      <Intro />
+      <SetUsername />
     </div>
   );
 }
