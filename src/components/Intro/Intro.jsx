@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Intro.scss"
+import "../scss/form.scss"
 
 function Intro() {
     return (
