@@ -1,1 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
+body {
+  height: 100vh;
+  background-color: #14173d;
+  color: white;
+  font-family: "GilroyMedium";
+  letter-spacing: 1px;
+}
+
+@font-face {
+font-family: "GilroyBold";
+src: local("GilroyBold"),
+ url("./fonts/Gilroy-FREE/Gilroy-Bold.ttf") format("truetype");
+font-weight: bold;
+}
+
+@font-face {
+font-family: "GilroyMedium";
+src: local("GilroyMedium"),
+ url("./fonts/Gilroy-FREE/Gilroy-Medium.ttf") format("truetype");
+font-weight: medium;
+}
