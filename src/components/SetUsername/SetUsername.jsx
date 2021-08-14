@@ -1,5 +1,6 @@
 import React from 'react'
 import "../scss/form.scss"
+import {Link} from "react-router-dom"
 
 function SetUsername() {
     return (
@@ -16,7 +17,7 @@ function SetUsername() {
                 <input type="text" className="input" placeholder="Here, please!" />
             </div>
             <div className="buttonContainer">
-                <button className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></button>
+                <Link to="/setpassword" className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
             </div>
         </>
     )
