@@ -1,8 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../scss/form.scss"
 import { Link } from "react-router-dom";
 
-function SetPassword() {
+function SetPassword(props) {
+    const [password, setPassword] = useState("")
+    const [passwordRepeat, setPasswordRepeat] = useState("")
+    const [errormessage, setErrorMessage] = useState("")
+
+    const error = () => {
+        if (passwordRepeat !== password) {
+            setErrorMessage("Ooops! Those passwords don't match. Try it again, please")
+        } else if (password.length < 9) {
+            setErrorMessage("Ooops! That password is too weak. Password must be atleast 9 symbols long.")
+        } else if (password !== props.user.user.password) {
+            setErrorMessage("Ooops! Your password is incorrect.")
+        }
+    }
     return (
         <>
             <div className="logoName">
@@ -14,11 +27,12 @@ function SetPassword() {
                 <h4 className="text">Great, now your<h4>password, please.</h4></h4>
             </div>
             <div className="form">
-                <input type="password" className="input" placeholder="Make it strong!" />
-                <input type="password" className="input" placeholder="And once again..." />
+                <input type="password" className="input" placeholder="Make it strong!" onChange={(e) => setPassword(e.target.value)}/>
+                <input type="password" className="input" placeholder="And once again..." onChange={(e) => setPasswordRepeat(e.target.value)}/>
+                <p>{errormessage}</p>
             </div>
             <div className="buttonContainer">
-                <Link to="/" className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
+                <Link onClick={() => error()} to={password === props?.user?.user?.password && passwordRepeat === props?.user?.user?.password ? "/" : "/setpassword"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
             </div>
         </>
     )

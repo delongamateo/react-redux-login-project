@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
@@ -11,6 +11,20 @@ import SetPassword from './components/SetPassword/SetPassword'
 
 
 function App() {
+  const [user, setUser] = useState({})
+
+  async function fetchUser() {
+      const resp = await fetch(`./data.json`);
+      const data = await resp.json();
+      setUser(data);
+  }
+
+  useEffect(() => {
+    fetchUser()
+  }, [])
+
+  console.log(user)
+
   return (
     <Router>
       <div className="App">
@@ -19,10 +33,10 @@ function App() {
                 <Intro />
             </Route>
             <Route path="/setusername">
-                <SetUsername />
+                <SetUsername user={user}/>
             </Route>
             <Route path="/setpassword">
-                <SetPassword />
+                <SetPassword user={user}/>
             </Route>
         </Switch>
       </div>

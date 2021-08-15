@@ -30,7 +30,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
     
     .input {
         width: 80%;
@@ -39,6 +38,7 @@
         background: none;
         height: 4em;
         padding-left: 1em;
+        margin-bottom: 2em;
     }
 }
 
