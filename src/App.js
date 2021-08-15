@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
@@ -8,20 +8,23 @@ import {
 import Intro from './components/Intro/Intro'
 import SetUsername from './components/SetUsername/SetUsername'
 import SetPassword from './components/SetPassword/SetPassword'
+import Profile from './components/Profile/Profile'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { selectUser, fetchUser } from './features/user/userSlice'
+
 
 
 function App() {
-  const [user, setUser] = useState({})
-
-  async function fetchUser() {
-      const resp = await fetch(`./data.json`);
-      const data = await resp.json();
-      setUser(data);
-  }
+  const dispatch = useDispatch()
+  const user = useSelector(selectUser)
+  const userStatus = useSelector(state => state.user.status)
 
   useEffect(() => {
-    fetchUser()
-  }, [])
+    if (userStatus === 'idle') {
+      dispatch(fetchUser())
+    }
+  }, [userStatus, dispatch])
 
   console.log(user)
 
@@ -33,10 +36,13 @@ function App() {
                 <Intro />
             </Route>
             <Route path="/setusername">
-                <SetUsername user={user}/>
+                <SetUsername />
             </Route>
             <Route path="/setpassword">
-                <SetPassword user={user}/>
+                <SetPassword />
+            </Route>
+            <Route path="/userprofile">
+                <Profile />
             </Route>
         </Switch>
       </div>

@@ -1,21 +1,26 @@
 import React, {useState} from 'react'
 import "../scss/form.scss"
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../features/user/userSlice'
 
-function SetPassword(props) {
+function SetPassword() {
     const [password, setPassword] = useState("")
     const [passwordRepeat, setPasswordRepeat] = useState("")
     const [errormessage, setErrorMessage] = useState("")
 
+    const user = useSelector(selectUser)
+    
     const error = () => {
         if (passwordRepeat !== password) {
             setErrorMessage("Ooops! Those passwords don't match. Try it again, please")
         } else if (password.length < 9) {
             setErrorMessage("Ooops! That password is too weak. Password must be atleast 9 symbols long.")
-        } else if (password !== props.user.user.password) {
+        } else if (password !== user.user.password) {
             setErrorMessage("Ooops! Your password is incorrect.")
         }
     }
+   
     return (
         <>
             <div className="logoName">
@@ -32,7 +37,7 @@ function SetPassword(props) {
                 <p>{errormessage}</p>
             </div>
             <div className="buttonContainer">
-                <Link onClick={() => error()} to={password === props?.user?.user?.password && passwordRepeat === props?.user?.user?.password ? "/" : "/setpassword"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
+                <Link onClick={() => error()} to={password === user?.user?.password && passwordRepeat === user?.user?.password ? "/userprofile" : "/setpassword"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
             </div>
         </>
     )

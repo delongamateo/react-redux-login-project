@@ -1,22 +1,25 @@
 import React, {useState} from 'react'
 import "../scss/form.scss"
 import {Link} from "react-router-dom"
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../features/user/userSlice'
 
-function SetUsername(props) {
+function SetUsername() {
     const [username, setUsername] = useState("")
     const [errormessage, setErrorMessage] = useState("")
+
+    const user = useSelector(selectUser)
 
     const error = () => {
         if (/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/.test(username) === false) {
             setErrorMessage("Ooops! Your username must contain only letters, numbers and spaces.")
         } else if (username.length < 3 || username.length > 20) {
             setErrorMessage("Ooops! Your username must be between 3 and 20 characters long.")
-        } else if (username !== props?.user?.user?.displayName) {
+        } else if (username !== user?.user?.displayName) {
             setErrorMessage("Ooops! Your username is not correct.")
         }
     }
     
-
     return (
         <>
             <div className="logoName">
@@ -32,7 +35,7 @@ function SetUsername(props) {
                 <p>{errormessage}</p>
             </div>
             <div className="buttonContainer">
-                <Link onClick={() => error()} to={username === props?.user?.user?.displayName ? "/setpassword" : "/setusername"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
+                <Link onClick={() => error()} to={username === user.user.displayName ? "/setpassword" : "/setusername"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
             </div>
         </>
     )
