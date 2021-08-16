@@ -32,10 +32,13 @@ function SetUsername() {
             </div>
             <div className="form">
                 <input type="text" className="input" placeholder="Here, please!" onChange={(e) => setUsername(e.target.value)}/>
-                <p>{errormessage}</p>
+                <div className="errorContainer">
+                    <img src="/assets/Error@1x.png" alt="error" style={{ display: `${errormessage === "" ? "none" : "block"}`}}/>
+                    <p className="error">{errormessage}</p>
+                </div>
             </div>
             <div className="buttonContainer">
-                <Link onClick={() => error()} to={username === user.user.displayName ? "/setpassword" : "/setusername"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
+                <Link onClick={() => error()} to={username === user?.user?.displayName ? "/setpassword" : "/setusername"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
             </div>
         </>
     )

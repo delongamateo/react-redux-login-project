@@ -16,8 +16,11 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
 const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {},
-        
+    reducers: {
+        updateCity: (state, action) => {
+            state.user.contact.locations[0].address.suburb = action.payload
+        }
+    },
     extraReducers: {
             [fetchUser.pending]: (state, action) => {
                 state.status = 'loading'
@@ -35,4 +38,5 @@ const userSlice = createSlice({
 });
 
 export const selectUser = state => state.user.user
+export const {updateCity} = userSlice.actions
 export default userSlice.reducer

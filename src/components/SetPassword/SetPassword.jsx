@@ -34,7 +34,10 @@ function SetPassword() {
             <div className="form">
                 <input type="password" className="input" placeholder="Make it strong!" onChange={(e) => setPassword(e.target.value)}/>
                 <input type="password" className="input" placeholder="And once again..." onChange={(e) => setPasswordRepeat(e.target.value)}/>
-                <p>{errormessage}</p>
+                <div className="errorContainer">
+                    <img src="/assets/Error@1x.png" alt="error" style={{ display: `${errormessage === "" ? "none" : "block"}` }} />
+                    <p className="error">{errormessage}</p>
+                </div>
             </div>
             <div className="buttonContainer">
                 <Link onClick={() => error()} to={password === user?.user?.password && passwordRepeat === user?.user?.password ? "/userprofile" : "/setpassword"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>

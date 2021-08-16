@@ -1,0 +1,120 @@
+.profileContainer {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+
+    .navbar {
+        height: 25%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .logo {
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .zentity {
+                width: 6em;
+                height: 2em;
+            }
+
+            .selfie {
+                width: 3em;
+                height: 3em;
+            }
+
+        }
+
+       
+    }
+
+    .userInfo {
+        height: 60%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .infoCard {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+
+                .title {
+                    color: rgb(182, 182, 182);
+                    font-size: 0.8em;
+                    margin-bottom: 0.5em;
+                }
+            }
+            
+            .actions {
+                width: 30%;
+                height: 100%;
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                align-items: flex-end;
+
+                .delete {
+                    color: #EA573E;
+                    font-size: 0.8em;
+                }
+
+                .edit {
+                    color: #1FD6BA;
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+
+    .logoutContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 1.5em;
+
+        .logout {
+            color: #EA573E;
+            background-color: #ffffff;
+            border: 2px solid #EA573E;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3em;
+            width: 45%;
+            height: 3.5em;
+
+            .buttonText {
+                margin-left: 0.8em;
+                font-family: "GilroyBold";
+            }
+
+            .next {
+                height: 3.5em;
+            }
+
+            &:hover {
+                background-color: #ffffff;
+                color: #EA573E;
+            }
+        }
+    }
+}
