@@ -5,12 +5,15 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '../../features/user/userSlice'
 
 function SetPassword() {
+    //saving password to state for comparison
     const [password, setPassword] = useState("")
     const [passwordRepeat, setPasswordRepeat] = useState("")
+    //current error message being displayed
     const [errormessage, setErrorMessage] = useState("")
 
     const user = useSelector(selectUser)
     
+    //function for validating password
     const error = () => {
         if (passwordRepeat !== password) {
             setErrorMessage("Ooops! Those passwords don't match. Try it again, please")
@@ -40,7 +43,9 @@ function SetPassword() {
                 </div>
             </div>
             <div className="buttonContainer">
-                <Link onClick={() => error()} to={password === user?.user?.password && passwordRepeat === user?.user?.password ? "/userprofile" : "/setpassword"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
+                <Link onClick={() => error()} to={password === user?.user?.password && passwordRepeat === user?.user?.password ? "/userprofile" : "/setpassword"} className="button">
+                    <strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" />
+                </Link>
             </div>
         </>
     )

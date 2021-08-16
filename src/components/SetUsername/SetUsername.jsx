@@ -5,11 +5,13 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '../../features/user/userSlice'
 
 function SetUsername() {
+    //saving username to state for comparison
     const [username, setUsername] = useState("")
     const [errormessage, setErrorMessage] = useState("")
-
+    //using user data from redux
     const user = useSelector(selectUser)
 
+    //function for validating username
     const error = () => {
         if (/^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/.test(username) === false) {
             setErrorMessage("Ooops! Your username must contain only letters, numbers and spaces.")
@@ -38,7 +40,9 @@ function SetUsername() {
                 </div>
             </div>
             <div className="buttonContainer">
-                <Link onClick={() => error()} to={username === user?.user?.displayName ? "/setpassword" : "/setusername"} className="button"><strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" /></Link>
+                <Link onClick={() => error()} to={username === user?.user?.displayName ? "/setpassword" : "/setusername"} className="button">
+                    <strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" />
+                </Link>
             </div>
         </>
     )

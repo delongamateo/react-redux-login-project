@@ -6,6 +6,7 @@ const initialState = {
     error: null
 }
 
+//fetching data from json file
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
     const response = await fetch(`./data.json`)
     const data = await response.json()

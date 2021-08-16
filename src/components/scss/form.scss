@@ -44,9 +44,11 @@
 
     .errorContainer {
         width: 90%;
+        height: 0.7em;
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
         text-align: start;
 
         .error {
@@ -92,3 +94,4 @@
         }
     }
 }
+

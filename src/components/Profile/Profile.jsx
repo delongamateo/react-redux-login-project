@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 function Profile() {
     const user = useSelector(selectUser)
     const dispatch = useDispatch();
-    console.log(dispatch(updateCity))
 
     return (
         <div className="profileContainer">
