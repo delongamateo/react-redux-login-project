@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../scss/profile.scss"
 import { useSelector, useDispatch } from 'react-redux'
 import { updateCity } from '../../features/user/userSlice'
@@ -7,11 +7,18 @@ import { Link } from "react-router-dom";
 
 function Profile() {
     const { user } = useSelector(state => state.user)
-    const [city, setCity] = useState(user?.user?.contact?.locations[0]?.address?.suburb)
+    const [username, setUsername] = useState("")
+    const [showUsernameInput, setShowUsernameInput] = useState(false)
+    const [city, setCity] = useState("")
     const [showCityInput, setShowCityInput] = useState(false)
+    const [postalCode, setPostalCode] = useState("")
+    const [showPostalCodeInput, setShowPostalCodeInput] = useState(false)
+    const [email, setEmail] = useState("")
+    const [showEmailInput, setShowEmailInput] = useState(false)
+    const [phone, setPhone] = useState("")
+    const [showPhoneInput, setShowPhoneInput] = useState(false)
     
     const dispatch = useDispatch();
-
 
     const changeCity = () => {
         dispatch(updateCity(city))
