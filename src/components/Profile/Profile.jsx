@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import "../scss/profile.scss"
 import { useSelector, useDispatch } from 'react-redux'
-import { updateName, updateSurname, updateUsername, updateAddress, updateAddressNumber, updateCity, updatePostalCode, updateEmail, updatePhone, updateSocialMedia } from '../../features/user/userSlice'
+import { updateName, updateSurname, updateUsername, deleteUsername, updateAddress, updateAddressNumber, updateCity, deleteCity, updatePostalCode, deletePostalCode, updateEmail, deleteEmail, updatePhone, deletePhone, updateSocialMedia, deleteSocialMedia } from '../../features/user/userSlice'
 import { Link } from "react-router-dom";
 
 
@@ -37,6 +37,9 @@ function Profile() {
     const changeUsername = () => {
         dispatch(updateUsername(username))
     }
+    const removeUsername = () => {
+        dispatch(deleteUsername())
+    }
     const changeAddress = () => {
         dispatch(updateAddress(address))
     }
@@ -45,6 +48,9 @@ function Profile() {
     }
     const changeCity = () => {
         dispatch(updateCity(city))
+    }
+    const removeCity = () => {
+        dispatch(deleteCity())
     }
     const changePostalCode = () => {
         dispatch(updatePostalCode(postalCode))
@@ -100,7 +106,7 @@ function Profile() {
                             </div>
                             <div className="actions">
                                 <button onClick={() => setShowUsernameInput(true)} className="edit">Edit</button>
-                                <p className="delete">Delete</p>
+                                <button onClick={() => removeUsername()} className="delete">Delete</button>
                             </div>
                         </> 
                     }
@@ -143,7 +149,7 @@ function Profile() {
                     </div>
                     <div className="actions">
                             <button onClick={() => setShowCityInput(true)} className="edit">Edit</button>
-                        <p className="delete">Delete</p>
+                            <button onClick={() => removeCity()} className="delete">Delete</button>
                     </div>
                     </>
                     }
