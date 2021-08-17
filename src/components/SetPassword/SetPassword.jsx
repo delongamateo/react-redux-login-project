@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import "../scss/form.scss"
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../features/user/userSlice'
 
 function SetPassword() {
     //saving password to state for comparison
@@ -11,7 +10,7 @@ function SetPassword() {
     //current error message being displayed
     const [errormessage, setErrorMessage] = useState("")
 
-    const user = useSelector(selectUser)
+    const { user } = useSelector(state => state.user)
     
     //function for validating password
     const error = () => {

@@ -19,8 +19,9 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         updateCity: (state, action) => {
-            state.user.contact.locations[0].address.suburb = action.payload
-        }
+            state.user.user.contact.locations[0].address.suburb = action.payload
+        },
+
     },
     extraReducers: {
             [fetchUser.pending]: (state, action) => {
@@ -38,6 +39,6 @@ const userSlice = createSlice({
         }
 });
 
-export const selectUser = state => state.user.user
-export const {updateCity} = userSlice.actions
+
+export const {updateCity, update} = userSlice.actions
 export default userSlice.reducer

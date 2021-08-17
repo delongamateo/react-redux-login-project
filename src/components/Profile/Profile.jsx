@@ -1,13 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../scss/profile.scss"
 import { useSelector, useDispatch } from 'react-redux'
-import { selectUser, updateCity } from '../../features/user/userSlice'
+import { updateCity } from '../../features/user/userSlice'
 import { Link } from "react-router-dom";
 
 
 function Profile() {
-    const user = useSelector(selectUser)
+    const { user } = useSelector(state => state.user)
+    const [city, setCity] = useState(user?.user?.contact?.locations[0]?.address?.suburb)
+    const [showCityInput, setShowCityInput] = useState(false)
+    
     const dispatch = useDispatch();
+
+
+    const changeCity = () => {
+        dispatch(updateCity(city))
+    }
 
     return (
         <div className="profileContainer">
@@ -23,7 +31,7 @@ function Profile() {
                 <div className="infoCard">
                     <div className="info">
                         <p className="title">Name</p>
-                        <h4>{`${user?.user?.name} ${user?.user?.surname}`}</h4>
+                        <h4 className="infoData">{`${user?.user?.name} ${user?.user?.surname}`}</h4>
                     </div>
                     <div className="actions">
                         <p className="edit">Edit</p>
@@ -32,7 +40,7 @@ function Profile() {
                 <div className="infoCard">
                     <div className="info">
                         <p className="title">Username</p>
-                        <h4>{user?.user?.displayName}</h4>
+                        <h4 className="infoData">{user?.user?.displayName}</h4>
                     </div>
                     <div className="actions">
                         <p className="edit">Edit</p>
@@ -41,7 +49,7 @@ function Profile() {
                 <div className="infoCard">
                     <div className="info">
                         <p className="title">Address</p>
-                        <h4>{`${user?.user?.contact?.locations[0]?.address.streetName} ${user?.user?.contact?.locations[0]?.address.streetNumber}`}</h4>
+                        <h4 className="infoData">{`${user?.user?.contact?.locations[0]?.address.streetName} ${user?.user?.contact?.locations[0]?.address.streetNumber}`}</h4>
                     </div>
                     <div className="actions">
                         <p className="edit">Edit</p>
@@ -49,19 +57,30 @@ function Profile() {
                     </div>
                 </div>
                 <div className="infoCard">
+                    {!showCityInput &&
+                    <>
                     <div className="info">
-                        <p className="title">City</p>
-                        <h4>{user?.user?.contact?.locations[0]?.address?.suburb}</h4>
+                            <p className="title">City</p>
+                            <h4 className="infoData">{user?.user?.contact?.locations[0]?.address?.suburb}</h4>
                     </div>
                     <div className="actions">
-                        <p className="edit">Edit</p>
+                            <button onClick={() => setShowCityInput(true)} className="edit">Edit</button>
                         <p className="delete">Delete</p>
                     </div>
+                    </>
+                    }
+                    {showCityInput &&
+                        <div className="changeData">
+                            <input type="text" onChange={e => setCity(e.target.value)} className="changeDataInput" value={city}/>
+                            <button onClick={() => setShowCityInput(false)} className="changeDataAction" ><img src="/assets/Cross@1x.png" /></button>
+                            <button onClick={() => { changeCity(); setShowCityInput(false) }} className="changeDataAction" ><img src="/assets/Next Blue@1x.png" /></button>
+                        </div>
+                    }
                 </div>
                 <div className="infoCard">
                     <div className="info">
                         <p className="title">Postal Code</p>
-                        <h4>{user?.user?.contact?.locations[0]?.address?.postalCode}</h4>
+                        <h4 className="infoData">{user?.user?.contact?.locations[0]?.address?.postalCode}</h4>
                     </div>
                     <div className="actions">
                         <p className="edit">Edit</p>
@@ -71,7 +90,7 @@ function Profile() {
                 <div className="infoCard">
                     <div className="info">
                         <p className="title">E-mail</p>
-                        <h4>{user?.user?.contact?.email}</h4>
+                        <h4 className="infoData">{user?.user?.contact?.email}</h4>
                     </div>
                     <div className="actions">
                         <p className="edit">Edit</p>
@@ -81,7 +100,7 @@ function Profile() {
                 <div className="infoCard">
                     <div className="info">
                         <p className="title">Phone</p>
-                        <h4>{`+420 ${user?.user?.contact?.phoneNumber}`}</h4>
+                        <h4 className="infoData">{`+420 ${user?.user?.contact?.phoneNumber}`}</h4>
                     </div>
                     <div className="actions">
                         <p className="edit">Edit</p>
@@ -91,7 +110,7 @@ function Profile() {
                 <div className="infoCard">
                     <div className="info">
                         <p className="title">Social Media</p>
-                        <h4>{user?.user?.contact?.socialNetworks[0]?.name}</h4>
+                        <h4 className="infoData">{user?.user?.contact?.socialNetworks[0]?.name}</h4>
                     </div>
                     <div className="actions">
                         <p className="edit">Edit</p>

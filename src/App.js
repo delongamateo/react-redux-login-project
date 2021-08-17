@@ -11,13 +11,13 @@ import SetPassword from './components/SetPassword/SetPassword'
 import Profile from './components/Profile/Profile'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { selectUser, fetchUser } from './features/user/userSlice'
+import { user, fetchUser } from './features/user/userSlice'
 
 
 
 function App() {
   const dispatch = useDispatch()
-  const user = useSelector(selectUser)
+  const {user} = useSelector(state => state.user)
   const userStatus = useSelector(state => state.user.status)
 
   useEffect(() => {
