@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 function Profile() {
-    const { user } = useSelector(state => state.user)
+    const { user, loggedIn } = useSelector(state => state.user)
     const dispatch = useDispatch();
 
     const [name, setName] = useState("")
@@ -55,14 +55,26 @@ function Profile() {
     const changePostalCode = () => {
         dispatch(updatePostalCode(postalCode))
     }
+    const removePostalCode = () => {
+        dispatch(deletePostalCode())
+    }
     const changeEmail = () => {
         dispatch(updateEmail(email))
+    }
+    const removeEmail = () => {
+        dispatch(deleteEmail())
     }
     const changePhone = () => {
         dispatch(updatePhone(phone))
     }
+    const removePhone = () => {
+        dispatch(deletePhone())
+    }
     const changeSocialMedia = () => {
         dispatch(updateSocialMedia(socialMedia))
+    }
+    const removeSocialMedia = () => {
+        dispatch(deleteSocialMedia())
     }
 
     return (
@@ -170,7 +182,7 @@ function Profile() {
                             </div>
                             <div className="actions">
                                 <button onClick={() => setShowPostalCodeInput(true)} className="edit">Edit</button>
-                                <p className="delete">Delete</p>
+                                <button onClick={() => removePostalCode()} className="delete">Delete</button>
                             </div>
                         </>
                     }
@@ -191,7 +203,7 @@ function Profile() {
                             </div>
                             <div className="actions">
                                 <button onClick={() => setShowEmailInput(true)} className="edit">Edit</button>
-                                <p className="delete">Delete</p>
+                                <button onClick={() => removeEmail()} className="delete">Delete</button>
                             </div>
                         </>
                     }
@@ -212,7 +224,7 @@ function Profile() {
                             </div>
                             <div className="actions">
                                 <button onClick={() => setShowPhoneInput(true)} className="edit">Edit</button>
-                                <p className="delete">Delete</p>
+                                <button onClick={() => removePhone()} className="delete">Delete</button>
                             </div>
                         </>
                     }
@@ -233,7 +245,7 @@ function Profile() {
                             </div>
                             <div className="actions">
                                 <button onClick={() => setShowSocialMediaInput(true)} className="edit">Edit</button>
-                                <p className="delete">Delete</p>
+                                <button onClick={() => removeSocialMedia()} className="delete">Delete</button>
                             </div>
                         </>
                     }

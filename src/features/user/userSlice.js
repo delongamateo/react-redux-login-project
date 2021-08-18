@@ -66,6 +66,9 @@ const userSlice = createSlice({
         },
         deleteSocialMedia: (state) => {
             state.user.user.contact.socialNetworks[0].name = ""
+        },
+        login: (state, action) => {
+            
         }
     },
     extraReducers: {
