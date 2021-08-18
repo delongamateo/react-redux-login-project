@@ -4,7 +4,6 @@ const initialState = {
     user: {},
     status: "idle",
     error: null,
-    loggedIn: false
 }
 
 //fetching data from json file
@@ -67,9 +66,6 @@ const userSlice = createSlice({
         deleteSocialMedia: (state) => {
             state.user.user.contact.socialNetworks[0].name = ""
         },
-        login: (state, action) => {
-            
-        }
     },
     extraReducers: {
             [fetchUser.pending]: (state, action) => {

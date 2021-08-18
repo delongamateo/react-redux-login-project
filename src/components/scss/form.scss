@@ -9,6 +9,14 @@
         width: 6em;
         height: 2em;
     }
+
+    @media (min-width: 768px) {
+        height: 20%;
+
+        .zentity {
+            margin: 0.5em 0;
+        }
+    }
 }
 
 .iconText {
@@ -21,6 +29,19 @@
 
     .text {
         color: #EA573E;
+    }
+
+    @media (min-width: 768px) {
+        height: 10%;
+
+        .code {
+            height: 2em;
+        }
+
+        .textContainer {
+            display: flex;
+            flex-direction: row;
+        }
     }
 }
 
@@ -57,6 +78,23 @@
             margin-left: 2em;
         }
     }
+
+    @media (min-width: 768px) {
+        height: 30%;
+
+        .input {
+            width: 50%;
+            margin-bottom: 1em;
+        }
+
+        .errorContainer {
+            text-align: center;
+
+            .error {
+                width: 50%;
+            }
+        }
+    }
 }
 
 .buttonContainer {
@@ -91,6 +129,15 @@
         &:hover {
             background-color: #ffffff;
             color: #EA573E;
+        }
+    }
+
+    @media (min-width: 768px) {
+        height: 15%;
+
+        .button {
+            margin-bottom: 1em;
+            width: 30%;
         }
     }
 }

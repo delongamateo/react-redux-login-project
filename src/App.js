@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.scss';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 import Intro from './components/Intro/Intro'
 import SetUsername from './components/SetUsername/SetUsername'
@@ -11,13 +12,14 @@ import SetPassword from './components/SetPassword/SetPassword'
 import Profile from './components/Profile/Profile'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { user, fetchUser } from './features/user/userSlice'
+import { fetchUser } from './features/user/userSlice'
 
 
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(true)
+
   const dispatch = useDispatch()
-  const {user} = useSelector(state => state.user)
   const userStatus = useSelector(state => state.user.status)
 
   useEffect(() => {
@@ -26,7 +28,7 @@ function App() {
     }
   }, [userStatus, dispatch])
 
-  console.log(user)
+
 
   return (
     <Router>
@@ -39,10 +41,11 @@ function App() {
                 <SetUsername />
             </Route>
             <Route path="/setpassword">
-                <SetPassword />
+                <SetPassword setLoggedIn={setLoggedIn}/>
             </Route>
             <Route path="/userprofile">
-                <Profile />
+                {/* showing profile only when logged in */}
+                {!loggedIn ? <Redirect to="/setusername" /> : <Profile setLoggedIn={setLoggedIn}/>} 
             </Route>
         </Switch>
       </div>

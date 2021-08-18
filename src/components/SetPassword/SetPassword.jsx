@@ -3,7 +3,8 @@ import "../scss/form.scss"
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux'
 
-function SetPassword() {
+
+function SetPassword({ setLoggedIn }) {
     //saving password to state for comparison
     const [password, setPassword] = useState("")
     const [passwordRepeat, setPasswordRepeat] = useState("")
@@ -11,6 +12,8 @@ function SetPassword() {
     const [errormessage, setErrorMessage] = useState("")
 
     const { user } = useSelector(state => state.user)
+
+    
     
     //function for validating password
     const error = () => {
@@ -22,6 +25,12 @@ function SetPassword() {
             setErrorMessage("Ooops! Your password is incorrect.")
         }
     }
+
+    const login = () => {
+        if (password == user.user.password) {
+            setLoggedIn(true)
+        }
+    }
    
     return (
         <>
@@ -31,7 +40,10 @@ function SetPassword() {
             </div>
             <div className="iconText">
                 <img src="/assets/Password@1x.png" alt="code" className="code" />
-                <h4 className="text">Great, now your<h4>password, please.</h4></h4>
+                <div className="textContainer">
+                    <h4 className="text">Great, now your</h4>
+                    <h4 className="text">password, please.</h4>
+                </div>
             </div>
             <div className="form">
                 <input type="password" className="input" placeholder="Make it strong!" onChange={(e) => setPassword(e.target.value)}/>
@@ -42,7 +54,7 @@ function SetPassword() {
                 </div>
             </div>
             <div className="buttonContainer">
-                <Link onClick={() => error()} to={password === user?.user?.password && passwordRepeat === user?.user?.password ? "/userprofile" : "/setpassword"} className="button">
+                <Link onClick={() => { error(); login()}} to={password === user?.user?.password && passwordRepeat === user?.user?.password ? "/userprofile" : "/setpassword"} className="button">
                     <strong className="buttonText">Continue</strong><img src="/assets/Next White@1x.png" alt="next" className="next" />
                 </Link>
             </div>

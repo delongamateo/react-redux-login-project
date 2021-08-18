@@ -151,4 +151,22 @@
             }
         }
     }
+
+    @media (min-width: 768px) {
+        height: auto;
+
+        .userInfo {
+            height: auto;
+
+            .infoCard {
+                height: 4em;
+            }
+        }
+
+        .logoutContainer {
+            .logout {
+                width: 30%;
+            }
+        }
+    }
 }

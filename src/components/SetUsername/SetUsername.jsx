@@ -29,7 +29,10 @@ function SetUsername() {
             </div>
             <div className="iconText">
                 <img src="/assets/User@1x.png" alt="code" className="code" />
-                <h4 className="text">Start by setting up<h4>your username.</h4></h4>
+                <div className="textContainer">
+                    <h4 className="text">Start by setting up</h4>
+                    <h4 className="text">your username.</h4>
+                </div>
             </div>
             <div className="form">
                 <input type="text" className="input" placeholder="Here, please!" onChange={(e) => setUsername(e.target.value)}/>

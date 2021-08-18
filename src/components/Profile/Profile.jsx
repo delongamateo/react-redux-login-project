@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import "../scss/profile.scss"
 import { useSelector, useDispatch } from 'react-redux'
-import { updateName, updateSurname, updateUsername, deleteUsername, updateAddress, updateAddressNumber, updateCity, deleteCity, updatePostalCode, deletePostalCode, updateEmail, deleteEmail, updatePhone, deletePhone, updateSocialMedia, deleteSocialMedia } from '../../features/user/userSlice'
+import { updateName, updateSurname, updateUsername, deleteUsername, updateAddress, updateAddressNumber, updateCity, deleteCity, updatePostalCode, deletePostalCode, updateEmail, deleteEmail, updatePhone, deletePhone, updateSocialMedia, deleteSocialMedia, loginStatus } from '../../features/user/userSlice'
 import { Link } from "react-router-dom";
 
 
-function Profile() {
-    const { user, loggedIn } = useSelector(state => state.user)
+function Profile({ setLoggedIn }) {
+    const { user } = useSelector(state => state.user)
     const dispatch = useDispatch();
 
+    // states for showing inputs and saving input data
     const [name, setName] = useState("")
     const [surname, setSurname] = useState("")
     const [showNameInput, setShowNameInput] = useState(false)
@@ -28,6 +29,7 @@ function Profile() {
     const [socialMedia, setSocialMedia] = useState("")
     const [showSocialMediaInput, setShowSocialMediaInput] = useState(false)
     
+    //functions for changing state in redux
     const changeName = () => {
         dispatch(updateName(name))
     }
@@ -76,6 +78,9 @@ function Profile() {
     const removeSocialMedia = () => {
         dispatch(deleteSocialMedia())
     }
+    const logout = () => {
+        setLoggedIn(false)
+    }
 
     return (
         <div className="profileContainer">
@@ -89,6 +94,7 @@ function Profile() {
             </div>
             <div className="userInfo">
                 <div className="infoCard">
+                    {/* logic for showing input and hiding displayed data */}
                     {!showNameInput &&
                         <>
                         <div className="info">
@@ -102,6 +108,7 @@ function Profile() {
                     }
                     {showNameInput &&
                         <div className="changeData">
+                            {/* saving input value to state */}
                             <input type="text" onChange={e => setName(e.target.value)} className="changeDataInput" value={name} />
                             <input type="text" onChange={e => setSurname(e.target.value)} className="changeDataInput" value={surname} />
                             <button onClick={() => setShowUsernameInput(false)} className="changeDataAction" ><img src="/assets/Cross@1x.png" /></button>
@@ -259,7 +266,7 @@ function Profile() {
                 </div>
             </div>
             <div className="logoutContainer">
-                <Link to="/" className="logout"><strong className="buttonText">Logout</strong><img src="/assets/Next@1x.png" alt="next" className="next" /></Link>
+                <Link to="/" onClick={()=>logout()} className="logout"><strong className="buttonText">Logout</strong><img src="/assets/Next@1x.png" alt="next" className="next" /></Link>
             </div>
         </div>
     )
